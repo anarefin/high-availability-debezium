@@ -1,0 +1,46 @@
+# Curl Command Examples for Testing Outbox Pattern
+
+# 1. Create a new product (will trigger outbox event creation)
+curl -X POST \
+  http://localhost:8080/api/products \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "name": "Test Product",
+    "description": "Created via curl for testing outbox pattern",
+    "price": 99.99
+}'
+
+# 2. Get all products
+curl -X GET http://localhost:8080/api/products
+
+# 3. Get a specific product by ID (replace {id} with actual ID)
+curl -X GET http://localhost:8080/api/products/{id}
+
+# 4. Update a product (will trigger outbox event update)
+curl -X PUT \
+  http://localhost:8080/api/products/{id} \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "name": "Updated Product",
+    "description": "Updated via curl for testing outbox pattern",
+    "price": 129.99
+}'
+
+# 5. Delete a product (will trigger outbox event deletion)
+curl -X DELETE http://localhost:8080/api/products/{id}
+
+# 6. Check Debezium connector status
+curl -s http://localhost:8083/connectors/outbox-connector/status | jq .
+
+# 7. List Kafka topics
+docker compose exec kafka-1 kafka-topics --bootstrap-server kafka-1:19092 --list
+
+# 8. Consume messages from Kafka topic
+docker compose exec kafka-1 kafka-console-consumer \
+  --bootstrap-server kafka-1:19092 \
+  --topic app.outbox_events \
+  --from-beginning
+
+# 9. Check PostgreSQL outbox table
+docker compose exec postgres psql -U user -d appdb \
+  -c "SELECT id, aggregate_type, event_type, created_at FROM app.outbox_events ORDER BY created_at DESC LIMIT 5;" 
