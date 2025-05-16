@@ -1,5 +1,5 @@
 {
-    "name": "outbox-connector",
+    "name": "app-connector",
     "config": {
         "connector.class": "io.debezium.connector.postgresql.PostgresConnector",
         "tasks.max": "1",
@@ -20,7 +20,7 @@
 
         "predicates": "IsOutboxEvent",
         "predicates.IsOutboxEvent.type": "org.apache.kafka.connect.transforms.predicates.TopicNameMatches",
-        "predicates.IsOutboxEvent.pattern": "app.app.outbox_events", 
+        "predicates.IsOutboxEvent.pattern": "app.app.outbox_events",
 
         "transforms": "outbox",
         "transforms.outbox.type": "io.debezium.transforms.outbox.EventRouter",

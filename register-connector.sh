@@ -20,6 +20,6 @@ echo "Connector registration request sent. Checking status..."
 sleep 5
 
 # Check if the connector is registered
-curl -s http://localhost:8083/connectors/outbox-connector/status | jq .
+curl -s http://localhost:8083/connectors/app-connector/status | jq .
 
 echo "Setup completed." 
