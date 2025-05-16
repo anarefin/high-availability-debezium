@@ -87,6 +87,7 @@ public class ProductService {
         }
     }
 
+
     // Simple DTO for delete events
     private record DeleteEvent(Integer id, String message) {}
 } 

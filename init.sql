@@ -21,6 +21,16 @@ CREATE TABLE IF NOT EXISTS app.outbox_events (
     created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
+-- Set up the transactions table
+CREATE TABLE IF NOT EXISTS app.transactions (
+    id SERIAL PRIMARY KEY,
+    amount DECIMAL(15, 2) NOT NULL,
+    type VARCHAR(100) NOT NULL,
+    description TEXT,
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
 -- Add RabbitMQ extension for JSON handling (optional, used by Debezium)
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 

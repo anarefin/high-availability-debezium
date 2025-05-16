@@ -11,11 +11,20 @@
         "database.server.name": "app",
         "topic.prefix": "app",
         "schema.include.list": "app",
-        "table.include.list": "app.outbox_events",
+        "table.include.list": "app.outbox_events,app.transactions",
         "tombstones.on.delete": "false",
         "plugin.name": "pgoutput",
+
+        "decimal.handling.mode": "string",
+        "timestamp.precision.mode": "connect",
+
+        "predicates": "IsOutboxEvent",
+        "predicates.IsOutboxEvent.type": "org.apache.kafka.connect.transforms.predicates.TopicNameMatches",
+        "predicates.IsOutboxEvent.pattern": "app.app.outbox_events", 
+
         "transforms": "outbox",
         "transforms.outbox.type": "io.debezium.transforms.outbox.EventRouter",
+        "transforms.outbox.predicate": "IsOutboxEvent",
         "transforms.outbox.table.field.event.id": "id",
         "transforms.outbox.table.field.event.key": "aggregate_id",
         "transforms.outbox.table.field.event.payload": "payload",
@@ -24,6 +33,7 @@
         "transforms.outbox.route.by.field": "event_type",
         "transforms.outbox.route.topic.replacement": "${routedByValue}",
         "transforms.outbox.table.expand.json.payload": true,
+
         "key.converter": "org.apache.kafka.connect.json.JsonConverter",
         "value.converter": "org.apache.kafka.connect.json.JsonConverter",
         "key.converter.schemas.enable": "false",
