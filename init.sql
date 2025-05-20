@@ -31,6 +31,18 @@ CREATE TABLE IF NOT EXISTS app.transactions (
     updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
+-- Create table for RabbitMQ transactions
+CREATE TABLE IF NOT EXISTS app.rabbit_transactions (
+    id SERIAL PRIMARY KEY,
+    original_transaction_id INTEGER,
+    amount DECIMAL(15, 2) NOT NULL,
+    type VARCHAR(255) NOT NULL,
+    description TEXT,
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    received_at TIMESTAMP NOT NULL
+);
+
 -- Add RabbitMQ extension for JSON handling (optional, used by Debezium)
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 
