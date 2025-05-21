@@ -10,7 +10,7 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "products", schema = "app")
+@Table(name = "products", schema = "public")
 @Data
 @Builder
 @NoArgsConstructor
@@ -19,7 +19,6 @@ public class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(columnDefinition = "serial")
     private Integer id;
 
     @Column(nullable = false)

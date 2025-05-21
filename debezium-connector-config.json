@@ -9,9 +9,9 @@
         "database.password": "password",
         "database.dbname": "appdb",
         "database.server.name": "app",
-        "topic.prefix": "app",
-        "schema.include.list": "app",
-        "table.include.list": "app.outbox_events,app.transactions",
+        "topic.prefix": "bits",
+        "schema.include.list": "public",
+        "table.include.list": "public.outbox_events,public.transactions",
         "tombstones.on.delete": "false",
         "plugin.name": "pgoutput",
 
@@ -20,7 +20,7 @@
 
         "predicates": "IsOutboxEvent",
         "predicates.IsOutboxEvent.type": "org.apache.kafka.connect.transforms.predicates.TopicNameMatches",
-        "predicates.IsOutboxEvent.pattern": "app.app.outbox_events",
+        "predicates.IsOutboxEvent.pattern": "bits.public.outbox_events",
 
         "transforms": "outbox",
         "transforms.outbox.type": "io.debezium.transforms.outbox.EventRouter",

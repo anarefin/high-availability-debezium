@@ -11,7 +11,7 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "rabbit_transactions", schema = "app")
+@Table(name = "rabbit_transactions", schema = "public")
 @Data
 @Builder
 @NoArgsConstructor
@@ -20,7 +20,6 @@ public class RabbitTransaction {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(columnDefinition = "serial")
     private Integer id;
 
     // Adding a field to store the original transaction ID if needed for tracing

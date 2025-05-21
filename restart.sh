@@ -6,7 +6,7 @@ docker compose down
 echo "Starting containers..."
 docker compose up -d
 
-echo "Waiting for services to initialize (60 seconds)..."
+echo "Waiting for services to initialize (20 seconds)..."
 sleep 20
 
 echo "Registering Debezium connector..."

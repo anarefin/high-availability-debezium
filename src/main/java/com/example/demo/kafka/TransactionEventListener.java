@@ -67,7 +67,7 @@ public class TransactionEventListener {
     // if it's no longer needed or if it was for a different purpose.
     
     @KafkaListener(
-        topics = "app.app.transactions",
+        topics = "bits.public.transactions",
         groupId = "transaction-consumer-group"
     )
     public void listen(String message) {

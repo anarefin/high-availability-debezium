@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Entity
-@Table(name = "outbox_events", schema = "app")
+@Table(name = "outbox_events", schema = "public")
 @Data
 @Builder
 @NoArgsConstructor

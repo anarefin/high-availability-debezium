@@ -27,7 +27,7 @@ public class OutboxEventListener {
     // Listen to both the general outbox events topic and specific event topics
     @KafkaListener(
         topics = {
-            "${kafka.topics.outbox-events:app.outbox_events}",
+            "${kafka.topics.outbox-events:bits.public.outbox_events}",
             "PRODUCT_CREATED",
             "PRODUCT_UPDATED",
             "PRODUCT_DELETED"
